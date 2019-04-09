@@ -5,7 +5,7 @@ converts.vim
 
 Requirements
 ----
-`:echo has('python')`
+`:echo has('pythonx')`
 
 Screenshots
 ----

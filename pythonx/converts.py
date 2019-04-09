@@ -7,9 +7,10 @@ import urllib.parse
 
 class Converts(object):
 
+    _is_callback = lambda x: x.startswith('_') and not x.endswith('__')
+
     def __init__(self):
-        filter_func = lambda x: x.startswith('_') and not x.endswith('__')
-        self._callback = list(filter(filter_func, dir(self)))
+        self._callback = list(filter(Converts._is_callback, dir(self)))
 
     def parse(self, text, callback, *args):
         func = '_%s' % callback

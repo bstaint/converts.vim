@@ -9,7 +9,7 @@ Requirements
 
 Screenshots
 ----
-![avatar](https://raw.githubusercontent.com/bstaint/converts.vim/master/img/GIF.gif)
+![GIF](https://raw.githubusercontent.com/bstaint/converts.vim/master/doc/GIF.gif)
 
 Usage
 ----

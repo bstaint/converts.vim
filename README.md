@@ -3,9 +3,15 @@ converts.vim
 
 通过自定义方法转换选定的内容
 
-Requirements
+Requirements && Install (vim-plug)
 ----
 `:echo has('pythonx')`
+
+vimrc:
+'''
+Plug 'inkarkat/vim-ingo-library'
+Plug 'bstaint/converts.vim'
+'''
 
 Screenshots
 ----

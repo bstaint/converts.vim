@@ -35,7 +35,7 @@ fun! converts#convertText()
     try
       let @x = call(s:convert_list[key], [@x])
     catch /E716/
-      call elm#util#EchoWarning("", "Not found convert method!")
+      call ingo#msg#ErrorMsg("Not found convert method!")
     endtry
   endif
   " paste x register

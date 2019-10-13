@@ -8,10 +8,10 @@ Requirements && Install (vim-plug)
 `:echo has('pythonx')`
 
 vimrc:
-'''
+```
 Plug 'inkarkat/vim-ingo-library'
 Plug 'bstaint/converts.vim'
-'''
+```
 
 Screenshots
 ----

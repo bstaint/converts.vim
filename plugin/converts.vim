@@ -22,8 +22,10 @@ fun! s:backslash(text) abort
 endf
 
 "{{{ keymap
-if !hasmapto('<Leader>.','v')
-  vnoremap <silent> <Leader>. :call converts#convertText()<CR>
+vnoremap <silent> <Plug>ConvertText :call converts#convertText()<CR>
+
+if !hasmapto('<Plug>ConvertText','v')
+  vmap <Leader>. <Plug>ConvertText
 endif
 " }}}
 

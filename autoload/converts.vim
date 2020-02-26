@@ -26,13 +26,15 @@ endf "}}}
 "{{{ convert visual select text
 fun! converts#convertText()
     " only support visual mode
-    if visualmode() !=# 'v' | return | endif
-    let key = input("> ", "", "customlist,converts#completion")
+    if visualmode() !=# 'v' || &modifiable != 1
+        return
+    endif
+    let c = input("> ", "", "customlist,converts#completion")
     " cut select text x register
     normal! gv"xd
-    if key !=# ""
+    if c !=# ""
         try
-            let @x = call(g:converts_callback[key], [@x])
+            let @x = call(g:converts_callback[c], [@x])
             if @x ==# '' || @x ==# '0'
                 silent! normal! u
                 return

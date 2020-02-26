@@ -1,11 +1,5 @@
+pyx import vim
 pyx from converts import conv
-
-  "{{{ extend convert_list function maps
-" fun! converts#extend(maps)
-"     if type(a:maps) == type({})
-"         let s:convert_list = extend(s:convert_list, a:maps)
-"     endif
-" endfunction "}}}
 
 "{{{ input callback completion
 fun! converts#completion(A,L,P)
@@ -15,12 +9,17 @@ endf "}}}
 "{{{ python callback function
 fun! converts#callback(...)
     let text = a:000[-1]
-    let escape_text = substitute(text, "'", "\\\\'", 'g')
-    if a:0 == 3
-        let text = pyxeval(a:1."('".escape_text."','".a:2."')")
-    elseif a:0 == 4
-        let text = pyxeval(a:1."('".escape_text."','".a:2."',".a:3.")")
-    endif
+pyx << EOF
+
+text = vim.eval('text')
+argv = int(vim.eval('a:0'))
+callback = eval(vim.eval('a:1'))
+if argv == 3:
+    text = callback(text, vim.eval('a:2'))
+elif argv == 4:
+    text = callback(text, vim.eval('a:2'), vim.eval('a:3'))
+EOF
+    let text = pyxeval('text')
     return text
 endf "}}}
 
@@ -39,7 +38,7 @@ fun! converts#convertText()
                 return
             endif
         catch /E716/
-            call ingo#msg#ErrorMsg("Not found convert method!")
+            call ingo#msg#WarningMsg("Not found convert method!")
         endtry
     endif
     " paste x register

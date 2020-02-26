@@ -18,13 +18,13 @@ class Converts(object):
             return text
 
         func = getattr(self, func)
-        return func(text.encode('utf-8'), *args)
+        return func(text.encode(), *args)
 
     def _url(self, text, reserved=False):
         ''' urlencode or urldecode '''
         if reserved:
-            try: return urllib.parse.unquote(text)
-            except TypeError: return text
+            try: return urllib.parse.unquote(text.decode())
+            except TypeError:return text
 
         return urllib.parse.quote(text)
 
@@ -61,4 +61,4 @@ conv = Converts()
 
 if __name__ == "__main__":
     conv = Converts()
-    print(conv.parse("test", "dict", True))
+    print(conv.parse("6bf28ce%20ingo", "url", True))

@@ -23,28 +23,27 @@ EOF
     return text
 endf "}}}
 
+function! converts#convert(cb)
+    if empty(a:cb) == v:true | return | endif
+    try
+        let @x = call(g:converts_callback[a:cb], [ingo#selection#Get()])
+        if empty(@x) != v:true && @x != '0'
+            normal! gv"xP
+        endif
+    catch /E716/
+        call ingo#msg#WarningMsg("Not found convert method!")
+    endtry
+endfunction
+
 "{{{ convert visual select text
-fun! converts#convertText()
+fun! converts#prompt()
     " only support visual mode
     if visualmode() !=# 'v' || &modifiable != 1
         return
     endif
-    let c = input("> ", "", "customlist,converts#completion")
-    " cut select text x register
-    normal! gv"xd
-    if c !=# ""
-        try
-            let @x = call(g:converts_callback[c], [@x])
-            if @x ==# '' || @x ==# '0'
-                silent! normal! u
-                return
-            endif
-        catch /E716/
-            call ingo#msg#WarningMsg("Not found convert method!")
-        endtry
-    endif
-    " paste x register
-    normal! "xP
+
+    let c = input("Conv> ", "", "customlist,converts#completion")
+    call converts#convert(c)
 endf "}}}
 
 fun! s:file_name(file) abort

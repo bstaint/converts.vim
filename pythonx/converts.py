@@ -53,9 +53,8 @@ class Converts(object):
                 return text
 
         qs = urllib.parse.parse_qsl(self._url(text, True))
-        qs = [b'"%s": "%s"' % s for s in qs]
-
-        return b'{ %s }' % b', '.join(qs) if qs else text
+        qs = ['"%s": "%s"' % s for s in qs]
+        return '{ %s }' % ', '.join(qs) if qs else text
 
 conv = Converts()
 

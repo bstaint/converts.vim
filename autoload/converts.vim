@@ -27,7 +27,7 @@ function! converts#convert(cb)
     if empty(a:cb) == v:true | return | endif
     try
         let @x = call(g:converts_callback[a:cb], [ingo#selection#Get()])
-        if empty(@x) != v:true && @x != '0'
+        if empty(@x) != v:true && @x != '0' && @x != v:null
             normal! gv"xP
         endif
     catch /E716/

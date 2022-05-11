@@ -65,13 +65,13 @@ endf
 let g:converts_callback = get(g:, 'converts_callback', {})
 call extend(g:converts_callback, {
     \ 'fn':  function('s:file_name'),
-    \ 'bs':  function('s:backslash'),
+    \ 'backslash':  function('s:backslash'),
     \ 'abs': function('s:absolute_path'),
     \ 'md5': function('converts#callback', ['conv.parse', 'md5']),
-    \ 'ue':  function('converts#callback', ['conv.parse', 'url']),
-    \ 'ud':  function('converts#callback', ['conv.parse', 'url', 'True']),
-    \ 'de':  function('converts#callback', ['conv.parse', 'dict']),
-    \ 'dd':  function('converts#callback', ['conv.parse', 'dict', 'True']),
-    \ 'be':  function('converts#callback', ['conv.parse', 'base64']),
-    \ 'bd':  function('converts#callback', ['conv.parse', 'base64', 'True']),
+    \ 'urlencode':  function('converts#callback', ['conv.parse', 'url']),
+    \ 'urldecode':  function('converts#callback', ['conv.parse', 'url', 'True']),
+    \ 'reqencode':  function('converts#callback', ['conv.parse', 'dict']),
+    \ 'reqdecode':  function('converts#callback', ['conv.parse', 'dict', 'True']),
+    \ 'b64encode':  function('converts#callback', ['conv.parse', 'base64']),
+    \ 'b64decode':  function('converts#callback', ['conv.parse', 'base64', 'True']),
 \ })

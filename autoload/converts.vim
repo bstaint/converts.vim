@@ -26,12 +26,13 @@ endf "}}}
 function! converts#convert(cb)
     if empty(a:cb) == v:true | return | endif
     try
-        let @x = call(g:converts_callback[a:cb], [ingo#selection#Get()])
+        noau normal! ""y"
+        let @x = call(g:converts_callback[a:cb], [getreg('"')])
         if empty(@x) != v:true && @x != '0' && @x != v:null
             normal! gv"xP
         endif
     catch /E716/
-        call ingo#msg#WarningMsg("Not found convert method!")
+        lua vim.notify("Not found convert method!")
     endtry
 endfunction
 

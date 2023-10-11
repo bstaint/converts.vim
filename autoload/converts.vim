@@ -26,8 +26,8 @@ endf "}}}
 function! converts#convert(cb)
     if empty(a:cb) == v:true | return | endif
     try
-        noau normal! ""y"
-        let @x = call(g:converts_callback[a:cb], [getreg('"')])
+        noau normal! `<v`>y
+        let @x = call(g:converts_callback[a:cb], [getreg('@')])
         if empty(@x) != v:true && @x != '0' && @x != v:null
             normal! gv"xP
         endif
